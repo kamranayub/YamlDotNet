@@ -67,7 +67,11 @@ namespace YamlDotNet.Core
 
 		private static IDictionary<char, char> InitializeSimpleEscapeCodes()
 		{
+#if !SILVERLIGHT
 			IDictionary<char, char> codes = new SortedDictionary<char, char>();
+#else
+            IDictionary<char, char> codes = new Dictionary<char, char>();
+#endif
 			codes.Add('0', '\0');
 			codes.Add('a', '\x07');
 			codes.Add('b', '\x08');

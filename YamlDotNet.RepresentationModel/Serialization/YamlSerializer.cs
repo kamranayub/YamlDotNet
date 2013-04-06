@@ -390,7 +390,7 @@ namespace YamlDotNet.RepresentationModel.Serialization
 
 			if (type.IsEnum)
 			{
-				result = Enum.Parse(type, scalar.Value);
+				result = Enum.Parse(type, scalar.Value, true);
 			}
 			else
 			{
@@ -466,6 +466,7 @@ namespace YamlDotNet.RepresentationModel.Serialization
 						}
 						else
 						{
+#if !SILVERLIGHT
 							TypeConverter converter = TypeDescriptor.GetConverter(type);
 							if (converter != null && converter.CanConvertFrom(typeof(string)))
 							{
@@ -473,9 +474,12 @@ namespace YamlDotNet.RepresentationModel.Serialization
 							}
 							else
 							{
+#endif
 								result = Convert.ChangeType(scalar.Value, type, CultureInfo.InvariantCulture);
+#if !SILVERLIGHT
 							}
-						}
+#endif
+                        }
 						break;
 				}
 			}
@@ -526,7 +530,11 @@ namespace YamlDotNet.RepresentationModel.Serialization
 			// Choose a default list type in case there was no specific type specified.
 			if (type == typeof(object))
 			{
+#if !SILVERLIGHT
 				type = typeof(ArrayList);
+#else
+			    type = typeof (List<object>);
+#endif
 			}
 
 			object result;

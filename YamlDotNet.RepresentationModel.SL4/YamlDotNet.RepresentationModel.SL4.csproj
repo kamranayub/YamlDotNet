@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8F78FAF5-18E4-43C9-9029-1B7E2DA78E68}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YamlDotNet.RepresentationModel.SL4</RootNamespace>
+    <AssemblyName>YamlDotNet.RepresentationModel.SL4</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core">
+      <HintPath>$(TargetFrameworkDirectory)System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Browser" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\AnchorNotFoundException.cs">
+      <Link>AnchorNotFoundException.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\DocumentLoadingState.cs">
+      <Link>DocumentLoadingState.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\DuplicateAnchorException.cs">
+      <Link>DuplicateAnchorException.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\EmitterState.cs">
+      <Link>EmitterState.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\IYamlVisitor.cs">
+      <Link>IYamlVisitor.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\AnchorAssigner.cs">
+      <Link>Serialization\AnchorAssigner.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\AnchorAssigningObjectGraphVisitor.cs">
+      <Link>Serialization\AnchorAssigningObjectGraphVisitor.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\AnchorAssigningSerializationBehavior.cs">
+      <Link>Serialization\AnchorAssigningSerializationBehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\ChainedEventEmitter.cs">
+      <Link>Serialization\ChainedEventEmitter.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\ChainedObjectGraphVisitor.cs">
+      <Link>Serialization\ChainedObjectGraphVisitor.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\CustomSerializationObjectGraphVisitor.cs">
+      <Link>Serialization\CustomSerializationObjectGraphVisitor.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\DefaultExclusiveObjectGraphVisitor.cs">
+      <Link>Serialization\DefaultExclusiveObjectGraphVisitor.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\DefaultObjectFactory.cs">
+      <Link>Serialization\DefaultObjectFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\DeserializationContext.cs">
+      <Link>Serialization\DeserializationContext.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\DeserializationOptions.cs">
+      <Link>Serialization\DeserializationOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\DeserializationOverride.cs">
+      <Link>Serialization\DeserializationOverride.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\DeserializationOverrides.cs">
+      <Link>Serialization\DeserializationOverrides.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\EmittingObjectGraphVisitor.cs">
+      <Link>Serialization\EmittingObjectGraphVisitor.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\EventInfo.cs">
+      <Link>Serialization\EventInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\FullObjectGraphTraversalStrategy.cs">
+      <Link>Serialization\FullObjectGraphTraversalStrategy.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\IAliasProvider.cs">
+      <Link>Serialization\IAliasProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\IEventEmitter.cs">
+      <Link>Serialization\IEventEmitter.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\IObjectFactory.cs">
+      <Link>Serialization\IObjectFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\IObjectGraphTraversalStrategy.cs">
+      <Link>Serialization\IObjectGraphTraversalStrategy.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\IObjectGraphVisitor.cs">
+      <Link>Serialization\IObjectGraphVisitor.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\ISerializationBehavior.cs">
+      <Link>Serialization\ISerializationBehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\ISerializationBehaviorFactory.cs">
+      <Link>Serialization\ISerializationBehaviorFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\IYamlSerializable.cs">
+      <Link>Serialization\IYamlSerializable.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\IYamlTypeConverter.cs">
+      <Link>Serialization\IYamlTypeConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\LambdaObjectFactory.cs">
+      <Link>Serialization\LambdaObjectFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\ObjectAnchorCollection.cs">
+      <Link>Serialization\ObjectAnchorCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\ObjectConverter.cs">
+      <Link>Serialization\ObjectConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\ReflectionUtility.cs">
+      <Link>Serialization\ReflectionUtility.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\RoundtripObjectGraphTraversalStrategy.cs">
+      <Link>Serialization\RoundtripObjectGraphTraversalStrategy.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\Serializer.cs">
+      <Link>Serialization\Serializer.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\StreamFragment.cs">
+      <Link>Serialization\StreamFragment.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\TagMappings.cs">
+      <Link>Serialization\TagMappings.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\TypeAssigningEventEmitter.cs">
+      <Link>Serialization\TypeAssigningEventEmitter.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\WriterEventEmitter.cs">
+      <Link>Serialization\WriterEventEmitter.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\YamlIgnoreAttribute.cs">
+      <Link>Serialization\YamlIgnoreAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\YamlSerializer.cs">
+      <Link>Serialization\YamlSerializer.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\Serialization\YamlSerializerModes.cs">
+      <Link>Serialization\YamlSerializerModes.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\YamlAliasNode.cs">
+      <Link>YamlAliasNode.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\YamlDocument.cs">
+      <Link>YamlDocument.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\YamlMappingNode.cs">
+      <Link>YamlMappingNode.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\YamlNode.cs">
+      <Link>YamlNode.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\YamlNodeIdentityEqualityComparer.cs">
+      <Link>YamlNodeIdentityEqualityComparer.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\YamlScalarNode.cs">
+      <Link>YamlScalarNode.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\YamlSequenceNode.cs">
+      <Link>YamlSequenceNode.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\YamlStream.cs">
+      <Link>YamlStream.cs</Link>
+    </Compile>
+    <Compile Include="..\YamlDotNet.RepresentationModel\YamlVisitor.cs">
+      <Link>YamlVisitor.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YamlDotNet.Core.SL4\YamlDotNet.Core.SL4.csproj">
+      <Project>{083d5c5d-6f65-4a76-ab0c-bfaa7877ad22}</Project>
+      <Name>YamlDotNet.Core.SL4</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

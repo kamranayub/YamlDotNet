@@ -78,6 +78,7 @@ namespace YamlDotNet.RepresentationModel.Serialization
 				return value;
 			}
 
+#if !SILVERLIGHT
 			TypeConverter resultTypeConverter = TypeDescriptor.GetConverter(from);
 			if (resultTypeConverter != null && resultTypeConverter.CanConvertTo(to))
 			{
@@ -89,6 +90,7 @@ namespace YamlDotNet.RepresentationModel.Serialization
 			{
 				return expectedTypeConverter.ConvertFrom(value);
 			}
+#endif
 
 			if (typeof(IConvertible).IsAssignableFrom(from))
 			{

@@ -20,6 +20,9 @@
 //  SOFTWARE.
 
 using System.Collections.Generic;
+#if WINDOWS_PHONE
+using WP7Helpers.Common;
+#endif
 
 namespace YamlDotNet.RepresentationModel
 {

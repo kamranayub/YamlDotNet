@@ -19,7 +19,11 @@ namespace YamlDotNet.RepresentationModel.Serialization
 		{
 			if(maxRecursion <= 0)
 			{
+#if !SILVERLIGHT
 				throw new ArgumentOutOfRangeException("maxRecursion", maxRecursion, "maxRecursion must be greater than 1");
+#else
+                throw new ArgumentOutOfRangeException("maxRecursion", "maxRecursion must be greater than 1");
+#endif
 			}
 
 			this.maxRecursion = maxRecursion;

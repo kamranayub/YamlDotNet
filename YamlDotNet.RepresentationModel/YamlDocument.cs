@@ -23,6 +23,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+#if WINDOWS_PHONE
+using WP7Helpers.Common;
+#endif
 using YamlDotNet.Core;
 using YamlDotNet.Core.Events;
 

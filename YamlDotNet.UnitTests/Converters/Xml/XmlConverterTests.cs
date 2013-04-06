@@ -21,6 +21,7 @@
 
 using System;
 using System.Xml;
+using System.Xml.Linq;
 using Xunit;
 using YamlDotNet.RepresentationModel;
 using YamlDotNet.Converters.Xml;
@@ -43,7 +44,7 @@ namespace YamlDotNet.UnitTests
 			YamlDocument yaml = GetDocument("test2.yaml");
 			
 			XmlConverter converter = new XmlConverter();
-			XmlDocument xml = converter.ToXml(yaml);
+			XDocument xml = converter.ToXml(yaml);
 			
 			xml.Save(Console.Out);
 		}			
@@ -53,7 +54,7 @@ namespace YamlDotNet.UnitTests
 			YamlDocument yaml = GetDocument("test8.yaml");
 			
 			XmlConverter converter = new XmlConverter();
-			XmlDocument xml = converter.ToXml(yaml);
+            XDocument xml = converter.ToXml(yaml);
 			
 			xml.Save(Console.Out);
 		}			
@@ -63,7 +64,7 @@ namespace YamlDotNet.UnitTests
 			YamlDocument yaml = GetDocument("test9.yaml");
 
 			XmlConverter converter = new XmlConverter();
-			XmlDocument xml = converter.ToXml(yaml);
+            XDocument xml = converter.ToXml(yaml);
 			
 			xml.Save(Console.Out);
 		}			
@@ -73,7 +74,7 @@ namespace YamlDotNet.UnitTests
 			YamlDocument yaml = GetDocument("test10.yaml");
 			
 			XmlConverter converter = new XmlConverter();
-			XmlDocument xml = converter.ToXml(yaml);
+            XDocument xml = converter.ToXml(yaml);
 			
 			xml.Save(Console.Out);
 		}			
@@ -81,7 +82,7 @@ namespace YamlDotNet.UnitTests
 		[Fact]
 		public void ToXmlUsingExtension() {
 			YamlDocument yaml = GetDocument("test10.yaml");
-			XmlDocument xml = yaml.ToXml();
+            XDocument xml = yaml.ToXml();
 			xml.Save(Console.Out);
 		}			
 
@@ -91,14 +92,14 @@ namespace YamlDotNet.UnitTests
 			YamlDocument yaml = GetDocument("test10.yaml");
 
 			XmlConverter converter = new XmlConverter();
-			XmlDocument xml = converter.ToXml(yaml);
+            XDocument xml = converter.ToXml(yaml);
 
 			StringWriter firstBuffer = new StringWriter();
 			xml.Save(firstBuffer);
 			Console.Out.Write(firstBuffer.ToString());
 
 			YamlDocument intermediate = converter.FromXml(xml);
-			XmlDocument final = converter.ToXml(intermediate);
+            XDocument final = converter.ToXml(intermediate);
 
 			StringWriter secondBuffer = new StringWriter();
 			final.Save(secondBuffer);

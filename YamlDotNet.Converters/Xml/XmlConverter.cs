@@ -21,6 +21,7 @@
 
 using System;
 using System.Xml;
+using System.Xml.Linq;
 using YamlDotNet.RepresentationModel;
 using System.Globalization;
 using System.Diagnostics;
@@ -28,18 +29,18 @@ using System.Diagnostics;
 namespace YamlDotNet.Converters.Xml
 {
 	/// <summary>
-	/// Converts between <see cref="YamlDocument"/> and <see cref="XmlDocument"/>.
+	/// Converts between <see cref="YamlDocument"/> and <see cref="XDocument"/>.
 	/// </summary>
 	public class XmlConverter
 	{
-		#region YamlToXmlDocumentVisitor
-		private class YamlToXmlDocumentVisitor : YamlVisitor
+		#region YamlToXDocumentVisitor
+		private class YamlToXDocumentVisitor : YamlVisitor
 		{
-			private XmlDocument myDocument;
-			private XmlNode current;
+			private XDocument myDocument;
+			private XContainer current;
 			private readonly XmlConverterOptions options;
 
-			public XmlDocument Document
+			public XDocument Document
 			{
 				get
 				{
@@ -49,31 +50,32 @@ namespace YamlDotNet.Converters.Xml
 
 			private void PushNode(string elementName)
 			{
-				XmlNode newNode = myDocument.CreateElement(elementName);
-				current.AppendChild(newNode);
+				XContainer newNode = new XElement(elementName);
+				current.Add(newNode);
 				current = newNode;
 			}
 
 			private void PopNode()
 			{
-				current = current.ParentNode;
+				current = current.Parent;
 			}
 
-			public YamlToXmlDocumentVisitor(XmlConverterOptions options)
+			public YamlToXDocumentVisitor(XmlConverterOptions options)
 			{
 				this.options = options;
 			}
 
 			protected override void Visit(YamlDocument document)
 			{
-				myDocument = new XmlDocument();
+				myDocument = new XDocument();
 				current = myDocument;
 				PushNode(options.RootElementName);
 			}
 
 			protected override void Visit(YamlScalarNode scalar)
 			{
-				current.AppendChild(myDocument.CreateTextNode(scalar.Value));
+                
+				current.Add(new XText(scalar.Value));
 			}
 
 			protected override void Visit(YamlSequenceNode sequence)
@@ -147,11 +149,11 @@ namespace YamlDotNet.Converters.Xml
 			}
 
 			private readonly XmlConverterOptions options;
-			private readonly XmlDocument document;
-			private XmlNode current;
-			private XmlNode currentParent;
+			private readonly XDocument document;
+			private XNode current;
+			private XContainer currentParent;
 
-			public XmlToYamlConverter(XmlDocument document, XmlConverterOptions options)
+			public XmlToYamlConverter(XDocument document, XmlConverterOptions options)
 			{
 				this.document = document;
 				this.options = options;
@@ -160,7 +162,7 @@ namespace YamlDotNet.Converters.Xml
 			public YamlDocument ParseDocument()
 			{
 				currentParent = document;
-				current = document.DocumentElement;
+				current = document.Root;
 				using (ExpectElement(options.RootElementName))
 				{
 					return new YamlDocument(ParseNode());
@@ -251,9 +253,9 @@ namespace YamlDotNet.Converters.Xml
 					return false;
 				}
 
-				if (nodeType == XmlNodeType.Element)
+                if (nodeType == XmlNodeType.Element)
 				{
-					if (current.LocalName != elementName)
+					if (((XElement)current).Name != elementName)
 					{
 						return false;
 					}
@@ -269,14 +271,14 @@ namespace YamlDotNet.Converters.Xml
 
 			private bool AcceptElement(string elementName)
 			{
-				return Accept(XmlNodeType.Element, elementName);
+                return Accept(XmlNodeType.Element, elementName);
 			}
 
-			private XmlNode Expect(XmlNodeType nodeType, string elementName)
+            private XNode Expect(XmlNodeType nodeType, string elementName)
 			{
 				if(!Accept(nodeType, elementName))
 				{
-					if (nodeType == XmlNodeType.Text)
+                    if (nodeType == XmlNodeType.Text)
 					{
 						throw new InvalidOperationException(string.Format(
 							CultureInfo.InvariantCulture,
@@ -291,14 +293,15 @@ namespace YamlDotNet.Converters.Xml
 							CultureInfo.InvariantCulture,
 							"Expected element '{0}', got '{1}'.",
 							elementName,
-							current.LocalName
+							((XElement)current).Name
 						));
 					}
 				}
-
-				currentParent = current;
-				current = current.FirstChild;
-				return currentParent;
+                if (current is XContainer) {
+				    currentParent = current as XContainer;                
+                    current = ((XContainer)current).FirstNode;
+                }
+                return currentParent;
 			}
 
 			private IDisposable ExpectElement(string elementName)
@@ -309,14 +312,14 @@ namespace YamlDotNet.Converters.Xml
 
 			private string ExpectText()
 			{
-				return Expect(XmlNodeType.Text, null).Value;
+                return ((XText)Expect(XmlNodeType.Text, null)).Value;
 			}
 
 			private void Exit()
 			{
 				Debug.Assert(current == null);
-				current = currentParent.NextSibling;
-				currentParent = currentParent.ParentNode;
+				current = currentParent.NextNode;
+				currentParent = currentParent.Parent;
 			}
 			#endregion
 		}
@@ -342,23 +345,23 @@ namespace YamlDotNet.Converters.Xml
 		}
 
 		/// <summary>
-		/// Converts a <see cref="YamlDocument"/> to <see cref="XmlDocument"/>.
+		/// Converts a <see cref="YamlDocument"/> to <see cref="XDocument"/>.
 		/// </summary>
 		/// <param name="document">The YAML document to convert.</param>
 		/// <returns></returns>
-		public XmlDocument ToXml(YamlDocument document)
+		public XDocument ToXml(YamlDocument document)
 		{
-			YamlToXmlDocumentVisitor visitor = new YamlToXmlDocumentVisitor(options);
+			YamlToXDocumentVisitor visitor = new YamlToXDocumentVisitor(options);
 			document.Accept(visitor);
 			return visitor.Document;
 		}
 
 		/// <summary>
-		/// Converts a <see cref="XmlDocument"/> to <see cref="YamlDocument"/>.
+		/// Converts a <see cref="XDocument"/> to <see cref="YamlDocument"/>.
 		/// </summary>
 		/// <param name="document">The XML document to convert.</param>
 		/// <returns></returns>
-		public YamlDocument FromXml(XmlDocument document)
+		public YamlDocument FromXml(XDocument document)
 		{
 			XmlToYamlConverter converter = new XmlToYamlConverter(document, options);
 			return converter.ParseDocument();

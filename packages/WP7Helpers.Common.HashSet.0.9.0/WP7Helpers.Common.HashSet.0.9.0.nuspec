@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>WP7Helpers.Common.HashSet</id>
+    <version>0.9.0</version>
+    <title>Naive HashSet implementation for Windows Phone 7.x</title>
+    <authors>Toni Petrina</authors>
+    <owners>Toni Petrina</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A naive implementation for the missing generic HashSet&lt;T&gt; collection type. By naive I mean it is a simple wrapper around a Dictionary. Use at your own risk.</description>
+    <summary>Adds HashSet&lt;T&gt; collection type.</summary>
+    <releaseNotes />
+    <copyright />
+    <language />
+    <tags>BCL HashSet</tags>
+    <references />
+  </metadata>
+</package>

@@ -29,8 +29,11 @@ namespace YamlDotNet.Core.Events
 	/// </summary>
 	public abstract class NodeEvent : ParsingEvent, INodeEvent
 	{
+#if !SILVERLIGHT
 		internal static readonly Regex anchorValidator = new Regex(@"^[0-9a-zA-Z_\-]+$", RegexOptions.Compiled);
-
+#else
+        internal static readonly Regex anchorValidator = new Regex(@"^[0-9a-zA-Z_\-]+$");
+#endif
 		private readonly string anchor;
 
 		/// <summary>

@@ -26,9 +26,11 @@ namespace YamlDotNet.Core
 {
 	/// <summary>
 	/// Exception that is thrown when a syntax error is detected on a YAML stream.
-	/// </summary>
+    /// </summary>
+#if !SILVERLIGHT
 	[Serializable]
-	public class SyntaxErrorException : YamlException
+#endif
+    public class SyntaxErrorException : YamlException
 	{
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SyntaxErrorException"/> class.
@@ -64,6 +66,7 @@ namespace YamlDotNet.Core
 		{
 		}
 
+#if !SILVERLIGHT
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SyntaxErrorException"/> class.
 		/// </summary>
@@ -75,5 +78,6 @@ namespace YamlDotNet.Core
 			: base(info, context)
 		{
 		}
+#endif
 	}
 }

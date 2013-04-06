@@ -26,7 +26,9 @@ namespace YamlDotNet.Core
 	/// <summary>
 	/// Represents a location inside a file
 	/// </summary>
+#if !SILVERLIGHT
 	[Serializable]
+#endif
 	public struct Mark
 	{
 		private int index;

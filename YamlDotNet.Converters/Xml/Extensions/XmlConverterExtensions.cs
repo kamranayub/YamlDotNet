@@ -21,6 +21,7 @@
 
 using System;
 using System.Xml;
+using System.Xml.Linq;
 using YamlDotNet.Converters.Xml;
 using YamlDotNet.RepresentationModel;
 
@@ -33,7 +34,7 @@ namespace YamlDotNet.Converters.Xml.Extensions {
 		/// <summary>
 		/// Invokes <see cref="XmlConverter.ToXml"/>.
 		/// </summary>
-		public static XmlDocument ToXml(this YamlDocument document, XmlConverterOptions options)
+		public static XDocument ToXml(this YamlDocument document, XmlConverterOptions options)
 		{
 			XmlConverter converter = new XmlConverter(options);
 			return converter.ToXml(document);
@@ -42,7 +43,7 @@ namespace YamlDotNet.Converters.Xml.Extensions {
 		/// <summary>
 		/// Invokes <see cref="XmlConverter.ToXml"/>.
 		/// </summary>
-		public static XmlDocument ToXml(this YamlDocument document)
+		public static XDocument ToXml(this YamlDocument document)
 		{
 			XmlConverter converter = new XmlConverter();
 			return converter.ToXml(document);

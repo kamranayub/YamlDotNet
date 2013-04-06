@@ -96,9 +96,13 @@ namespace YamlDotNet.Core
 				return
 					output.Encoding == Encoding.UTF8 ||
 					output.Encoding == Encoding.Unicode ||
-					output.Encoding == Encoding.BigEndianUnicode ||
+					output.Encoding == Encoding.BigEndianUnicode
+#if !SILVERLIGHT
+                    ||
 					output.Encoding == Encoding.UTF7 ||
-					output.Encoding == Encoding.UTF32;
+					output.Encoding == Encoding.UTF32
+#endif
+                    ;
 			}
 		}
 
@@ -809,7 +813,13 @@ namespace YamlDotNet.Core
 			isIndentation = false;
 		}
 
-		private static readonly Regex uriReplacer = new Regex(@"[^0-9A-Za-z_\-;?@=$~\\\)\]/:&+,\.\*\(\[!]", RegexOptions.Compiled | RegexOptions.Singleline);
+
+		private static readonly Regex uriReplacer = new Regex(@"[^0-9A-Za-z_\-;?@=$~\\\)\]/:&+,\.\*\(\[!]"
+#if !SILVERLIGHT
+            , RegexOptions.Compiled | RegexOptions.Singleline);
+#else
+            , RegexOptions.Singleline);
+#endif
 
 		private static string UrlEncode(string text)
 		{

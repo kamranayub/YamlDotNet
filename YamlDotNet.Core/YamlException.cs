@@ -27,9 +27,11 @@ namespace YamlDotNet.Core
 {
 	/// <summary>
 	/// Base exception that is thrown when the a problem occurs in the YamlDotNet library.
-	/// </summary>
+    /// </summary>
+#if !SILVERLIGHT
 	[Serializable]
-	public class YamlException : Exception
+#endif
+    public class YamlException : Exception
 	{
 		/// <summary>
 		/// Gets the position in the input stream where the event that originated the exception starts.
@@ -85,6 +87,7 @@ namespace YamlDotNet.Core
 		{
 		}
 
+#if !SILVERLIGHT
 		/// <summary>
 		/// Initializes a new instance of the <see cref="YamlException"/> class.
 		/// </summary>
@@ -116,5 +119,7 @@ namespace YamlDotNet.Core
 			info.AddValue("Start", Start);
 			info.AddValue("End", End);
 		}
+#endif
+
 	}
 }

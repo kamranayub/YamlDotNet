@@ -28,7 +28,9 @@ namespace YamlDotNet.RepresentationModel
 	/// <summary>
 	/// The exception that is thrown when a duplicate anchor is detected.
 	/// </summary>
+#if !SILVERLIGHT
 	[Serializable]
+#endif
 	public class DuplicateAnchorException : YamlException
 	{
 		/// <summary>
@@ -65,6 +67,7 @@ namespace YamlDotNet.RepresentationModel
 		{
 		}
 
+#if !SILVERLIGHT
 		/// <summary>
 		/// Initializes a new instance of the <see cref="DuplicateAnchorException"/> class.
 		/// </summary>
@@ -76,5 +79,7 @@ namespace YamlDotNet.RepresentationModel
 			: base(info, context)
 		{
 		}
+#endif
+
 	}
 }
