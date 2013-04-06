@@ -23,7 +23,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-#if WINDOWS_PHONE
+#if WINDOWS_PHONE && !WP8
 using WP7Helpers.Common;
 #endif
 using YamlDotNet.Core;

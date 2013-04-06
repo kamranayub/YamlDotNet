@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-#if WINDOWS_PHONE
+#if WINDOWS_PHONE && !WP8
 using WP7Helpers.Common;
 #endif
 
